@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "message": "Usuários listados com sucesso",
+  "data": [
+    {
+      "id": 1,
+      "name": "Maria Silva",
+      "email": "maria.silva@exemplo.com",
+      "age": 28,
+      "created": "2024-01-15T10:30:00Z"
+    },
+    {
+      "id": 2,
+      "name": "João Santos",
+      "email": "joao.santos@exemplo.com",
+      "age": 32,
+      "created": "2024-01-15T11:45:00Z"
+    },
+    {
+      "id": 3,
+      "name": "Ana Costa",
+      "email": "ana.costa@exemplo.com",
+      "age": 25,
+      "created": "2024-01-15T14:20:00Z"
+    }
+  ]
+}

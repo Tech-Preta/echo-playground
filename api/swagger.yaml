@@ -1,0 +1,530 @@
+openapi: 3.0.3
+info:
+  title: Echo Playground API
+  description: |
+    API completa que demonstra todas as funcionalidades do Echo framework.
+    Este playground inclui exemplos de router otimizado, middleware, data binding,
+    data rendering, templates, upload/download de arquivos, autenticação JWT,
+    CRUD completo e streaming.
+  version: 1.0.0
+  contact:
+    name: Echo Playground
+    url: https://echo.labstack.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:8080
+    description: Servidor de desenvolvimento
+  - url: https://api.echo-playground.com
+    description: Servidor de produção
+
+tags:
+  - name: Informações
+    description: Endpoints de informações gerais
+  - name: Demonstrações
+    description: Demonstrações de diferentes tipos de resposta
+  - name: Usuários
+    description: Gerenciamento de usuários
+  - name: Produtos
+    description: CRUD completo de produtos
+  - name: Upload/Download
+    description: Upload e download de arquivos
+  - name: Autenticação
+    description: Endpoints protegidos com JWT
+  - name: Streaming
+    description: Demonstrações de streaming
+
+paths:
+  /api/v1/:
+    get:
+      tags:
+        - Informações
+      summary: Informações sobre o framework
+      description: Retorna informações sobre o Echo framework e suas funcionalidades
+      responses:
+        '200':
+          description: Informações do framework
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+              example:
+                success: true
+                message: "Bem-vindo ao Echo Playground!"
+                data:
+                  framework: "Echo"
+                  version: "v4"
+                  features:
+                    - "High Performance Router"
+                    - "Scalable REST APIs"
+                    - "Automatic TLS"
+                    - "HTTP/2 Support"
+                    - "Middleware System"
+                    - "Data Binding"
+                    - "Data Rendering"
+                    - "Template Support"
+                    - "Extensible Architecture"
+
+  /api/v1/hello/{name}:
+    get:
+      tags:
+        - Demonstrações
+      summary: Saudação personalizada
+      description: Retorna uma saudação personalizada usando parâmetros de path
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: Nome da pessoa
+          schema:
+            type: string
+          example: "João"
+      responses:
+        '200':
+          description: Saudação personalizada
+          content:
+            text/plain:
+              schema:
+                type: string
+              example: "Olá, João! Bem-vindo ao Echo!"
+
+  /api/v1/html:
+    get:
+      tags:
+        - Demonstrações
+      summary: Página HTML renderizada
+      description: Renderiza uma página HTML usando templates
+      responses:
+        '200':
+          description: Página HTML
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /api/v1/xml:
+    get:
+      tags:
+        - Demonstrações
+      summary: Resposta em XML
+      description: Retorna dados em formato XML
+      responses:
+        '200':
+          description: Dados em XML
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
+
+  /api/v1/users:
+    post:
+      tags:
+        - Usuários
+      summary: Criar usuário
+      description: Cria um novo usuário com data binding automático
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+            example:
+              name: "Maria Silva"
+              email: "maria@exemplo.com"
+              age: 25
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        '400':
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/search:
+    get:
+      tags:
+        - Demonstrações
+      summary: Busca com query parameters
+      description: Demonstra o uso de query parameters
+      parameters:
+        - name: q
+          in: query
+          description: Termo de busca
+          schema:
+            type: string
+          example: "laptop"
+        - name: limit
+          in: query
+          description: Limite de resultados
+          schema:
+            type: string
+          example: "10"
+      responses:
+        '200':
+          description: Resultados da busca
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+
+  /api/v1/upload:
+    post:
+      tags:
+        - Upload/Download
+      summary: Upload de arquivo
+      description: Faz upload de um arquivo
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Arquivo a ser enviado
+      responses:
+        '200':
+          description: Arquivo enviado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        '400':
+          description: Erro no upload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/download/{filename}:
+    get:
+      tags:
+        - Upload/Download
+      summary: Download de arquivo
+      description: Faz download de um arquivo
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          description: Nome do arquivo
+          schema:
+            type: string
+          example: "documento.pdf"
+      responses:
+        '200':
+          description: Arquivo para download
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+
+  /api/v1/protected/profile:
+    get:
+      tags:
+        - Autenticação
+      summary: Perfil do usuário autenticado
+      description: Endpoint protegido que requer autenticação JWT
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Perfil do usuário
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+        '401':
+          description: Não autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/products:
+    get:
+      tags:
+        - Produtos
+      summary: Listar produtos
+      description: Lista todos os produtos disponíveis
+      responses:
+        '200':
+          description: Lista de produtos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+    post:
+      tags:
+        - Produtos
+      summary: Criar produto
+      description: Cria um novo produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '201':
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+
+  /api/v1/products/{id}:
+    get:
+      tags:
+        - Produtos
+      summary: Obter produto
+      description: Obtém um produto específico por ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do produto
+          schema:
+            type: string
+          example: "1"
+      responses:
+        '200':
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+    put:
+      tags:
+        - Produtos
+      summary: Atualizar produto
+      description: Atualiza um produto existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do produto
+          schema:
+            type: string
+          example: "1"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProductRequest'
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+    delete:
+      tags:
+        - Produtos
+      summary: Deletar produto
+      description: Remove um produto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID do produto
+          schema:
+            type: string
+          example: "1"
+      responses:
+        '200':
+          description: Produto deletado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+
+  /api/v1/stream:
+    get:
+      tags:
+        - Streaming
+      summary: Streaming de dados
+      description: Demonstra streaming de dados em tempo real
+      responses:
+        '200':
+          description: Dados em streaming
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /api/v1/ws:
+    get:
+      tags:
+        - Demonstrações
+      summary: WebSocket (simulado)
+      description: Endpoint preparado para WebSocket
+      responses:
+        '200':
+          description: Informações sobre WebSocket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIResponse'
+
+components:
+  schemas:
+    APIResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Indica se a operação foi bem-sucedida
+        message:
+          type: string
+          description: Mensagem descritiva
+        data:
+          type: object
+          description: Dados da resposta (opcional)
+        error:
+          type: string
+          description: Mensagem de erro (opcional)
+      required:
+        - success
+        - message
+
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        message:
+          type: string
+          description: Mensagem de erro
+        error:
+          type: string
+          description: Detalhes do erro
+      required:
+        - success
+        - message
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do usuário
+        name:
+          type: string
+          description: Nome do usuário
+        email:
+          type: string
+          format: email
+          description: Email do usuário
+        age:
+          type: integer
+          description: Idade do usuário
+        created:
+          type: string
+          format: date-time
+          description: Data de criação
+      required:
+        - id
+        - name
+        - email
+        - age
+        - created
+
+    CreateUserRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nome do usuário
+          example: "Maria Silva"
+        email:
+          type: string
+          format: email
+          description: Email do usuário
+          example: "maria@exemplo.com"
+        age:
+          type: integer
+          description: Idade do usuário
+          example: 25
+      required:
+        - name
+        - email
+        - age
+
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do produto
+        name:
+          type: string
+          description: Nome do produto
+        price:
+          type: number
+          format: float
+          description: Preço do produto
+        description:
+          type: string
+          description: Descrição do produto
+        category:
+          type: string
+          description: Categoria do produto
+      required:
+        - id
+        - name
+        - price
+        - description
+        - category
+
+    CreateProductRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nome do produto
+          example: "Laptop"
+        price:
+          type: number
+          format: float
+          description: Preço do produto
+          example: 2999.99
+        description:
+          type: string
+          description: Descrição do produto
+          example: "Laptop de alta performance"
+        category:
+          type: string
+          description: Categoria do produto
+          example: "Eletrônicos"
+      required:
+        - name
+        - price
+        - description
+        - category
+
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: |
+        Token JWT para autenticação.
+        Use o formato: Bearer <token>
+        Exemplo: Bearer valid-token
+
+security:
+  - BearerAuth: []

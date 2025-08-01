@@ -1,0 +1,7 @@
+{
+  "query": "laptop",
+  "limit": "10",
+  "category": "Eletrônicos",
+  "min_price": 1000.00,
+  "max_price": 15000.00
+}

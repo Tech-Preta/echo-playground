@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Arquivo enviado com sucesso",
+  "data": {
+    "filename": "documento.pdf",
+    "size": 1024000,
+    "type": "application/pdf",
+    "uploaded_at": "2024-01-15T16:30:00Z",
+    "url": "/api/v1/download/documento.pdf"
+  }
+}

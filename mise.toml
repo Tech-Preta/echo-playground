@@ -1,0 +1,87 @@
+# Mise configuration for Echo Playground
+# https://mise.jdx.dev/
+
+[env]
+# Variáveis de ambiente para desenvolvimento
+GO_ENV = "development"
+ECHO_PORT = "8080"
+ECHO_HOST = "0.0.0.0"
+
+[tools]
+# Versões das ferramentas Go
+go = "1.21"
+golangci-lint = "1.55"
+gofmt = "latest"
+goimports = "latest"
+golint = "latest"
+govet = "latest"
+
+# Ferramentas de desenvolvimento
+curl = "latest"
+jq = "latest"
+httpie = "latest"
+
+# Ferramentas de documentação
+swagger-codegen = "latest"
+swagger-ui = "latest"
+
+# Ferramentas de teste
+gotest = "latest"
+gotestsum = "latest"
+
+# Ferramentas de build
+goreleaser = "latest"
+
+# Ferramentas específicas do projeto
+air = "latest"  # Hot reload para desenvolvimento
+dlv = "latest"  # Debugger
+mockgen = "latest"  # Gerador de mocks
+swag = "latest"  # Gerador de documentação Swagger
+
+[env.ECHO_DEBUG]
+value = "true"
+
+[env.ECHO_LOG_LEVEL]
+value = "debug"
+
+[env.ECHO_TEMPLATE_PATH]
+value = "web/templates"
+
+[env.ECHO_UPLOAD_PATH]
+value = "internal/app/uploads"
+
+[env.ECHO_STATIC_PATH]
+value = "web/static"
+
+# Configurações de banco de dados (para futuras implementações)
+[env.DB_HOST]
+value = "localhost"
+
+[env.DB_PORT]
+value = "5432"
+
+[env.DB_NAME]
+value = "echo_playground"
+
+[env.DB_USER]
+value = "postgres"
+
+[env.DB_PASSWORD]
+value = ""
+
+# Configurações de cache (para futuras implementações)
+[env.REDIS_HOST]
+value = "localhost"
+
+[env.REDIS_PORT]
+value = "6379"
+
+[env.REDIS_PASSWORD]
+value = ""
+
+# Configurações de JWT (para futuras implementações)
+[env.JWT_SECRET]
+value = "your-secret-key"
+
+[env.JWT_EXPIRY]
+value = "24h"

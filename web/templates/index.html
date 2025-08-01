@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .api-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .api-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .status {
+            background: #e8f5e8;
+            color: #2d5a2d;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚀 Echo</div>
+        <div class="message">{{.Message}}</div>
+
+        <div class="status">✅ Servidor funcionando perfeitamente!</div>
+
+        <a href="/api/v1/" class="api-link">Explorar API</a>
+
+        <div class="features">
+            <div class="feature">
+                <h3>⚡ Performance</h3>
+                <p>Router otimizado sem alocação dinâmica de memória</p>
+            </div>
+            <div class="feature">
+                <h3>🔧 Middleware</h3>
+                <p>Sistema extensível de middleware customizável</p>
+            </div>
+            <div class="feature">
+                <h3>📊 Data Binding</h3>
+                <p>Binding automático de JSON, XML e form-data</p>
+            </div>
+            <div class="feature">
+                <h3>🎨 Templates</h3>
+                <p>Suporte a qualquer engine de template</p>
+            </div>
+            <div class="feature">
+                <h3>🔒 Segurança</h3>
+                <p>TLS automático e suporte a HTTP/2</p>
+            </div>
+            <div class="feature">
+                <h3>📈 Escalável</h3>
+                <p>Arquitetura preparada para crescimento</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

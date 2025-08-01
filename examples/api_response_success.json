@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "message": "Operação realizada com sucesso",
+  "data": {
+    "id": 1,
+    "name": "Maria Silva",
+    "email": "maria.silva@exemplo.com",
+    "age": 28,
+    "created": "2024-01-15T10:30:00Z"
+  }
+}

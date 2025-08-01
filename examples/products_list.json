@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "message": "Produtos listados com sucesso",
+  "data": [
+    {
+      "id": 1,
+      "name": "MacBook Pro M2",
+      "price": 12999.99,
+      "description": "Laptop de alta performance com chip M2 da Apple",
+      "category": "Eletrônicos"
+    },
+    {
+      "id": 2,
+      "name": "iPhone 15 Pro",
+      "price": 8999.99,
+      "description": "Smartphone premium com câmera avançada",
+      "category": "Eletrônicos"
+    },
+    {
+      "id": 3,
+      "name": "AirPods Pro",
+      "price": 2499.99,
+      "description": "Fones de ouvido sem fio com cancelamento de ruído",
+      "category": "Acessórios"
+    }
+  ]
+}

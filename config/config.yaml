@@ -1,0 +1,33 @@
+# Configuração do Echo Playground
+server:
+  port: 8080
+  host: "0.0.0.0"
+  read_timeout: 30s
+  write_timeout: 30s
+  idle_timeout: 120s
+
+logging:
+  level: "debug"
+  format: "json"
+
+features:
+  tls:
+    enabled: false
+    auto: false
+  http2:
+    enabled: true
+  cors:
+    enabled: true
+    origins: ["*"]
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    headers: ["*"]
+
+api:
+  version: "v1"
+  prefix: "/api/v1"
+  docs_enabled: true
+
+upload:
+  max_size: "10MB"
+  allowed_types: ["jpg", "jpeg", "png", "gif", "pdf", "txt"]
+  directory: "internal/app/uploads"

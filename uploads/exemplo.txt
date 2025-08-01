@@ -1,0 +1,8 @@
+Este é um arquivo de exemplo para testar o download!
+
+Funcionalidades demonstradas:
+- Upload de arquivos
+- Download de arquivos
+- Gerenciamento de arquivos no Echo
+
+Data: 31 de julho de 2025
