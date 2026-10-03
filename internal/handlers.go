@@ -9,7 +9,7 @@ import (
 
 	"echo-playground/pkg/models"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/labstack/echo/v4"
 )
 
